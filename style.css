@@ -1,0 +1,60 @@
+body {
+  background: linear-gradient(to right, #0f0c29, #302b63, #24243e);
+  color: #fff;
+  font-family: 'Arial', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 50px;
+  margin: 0;
+}
+
+.container {
+  background: rgba(0,0,0,0.9);
+  padding: 25px;
+  border-radius: 15px;
+  width: 95%;
+  max-width: 700px;
+}
+
+textarea {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  margin-bottom: 12px;
+  font-size: 16px;
+  resize: none;
+}
+
+button {
+  background: #ff4d6d;
+  color: #fff;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+button:hover {
+  background: #ff1e3c;
+}
+
+#chatBox {
+  margin-top: 20px;
+  background: rgba(255,255,255,0.05);
+  padding: 15px;
+  border-radius: 10px;
+  min-height: 300px;
+  max-height: 600px;
+  overflow-y: auto;
+}
+
+.chat-user { color: #00ffff; margin-bottom: 10px; }
+.chat-bro { color: #ffcc00; margin-bottom: 15px; }
+.chat-bro code { display: block; background: rgba(0,0,0,0.5); padding: 10px; margin: 5px 0; border-radius: 8px; overflow-x: auto; }
+.chat-bro a { color: #00ff00; text-decoration: underline; }
+.bro-emoji { animation: pop 0.5s ease forwards; }
+
+@keyframes pop { 0% { transform: scale(0); opacity: 0; } 50% { transform: scale(1.5); opacity: 1; } 100% { transform: scale(1); opacity: 1; } }
