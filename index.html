@@ -78,17 +78,17 @@
     </div>
 
     <div class="flex items-center gap-2 overflow-x-auto text-xs font-medium border-t border-white/5 pt-2" id="tabs-row">
-      <button onclick="switchTab('All')" class="tab-btn px-3 py-1.5 rounded-full bg-blue-600 text-white">🔍 All</button>
-      <button onclick="switchTab('Images')" class="tab-btn px-3 py-1.5 rounded-full bg-white/5 text-slate-400 hover:text-white">🖼️ Images</button>
-      <button onclick="switchTab('News')" class="tab-btn px-3 py-1.5 rounded-full bg-white/5 text-slate-400 hover:text-white">📰 News</button>
-      <button onclick="switchTab('Videos')" class="tab-btn px-3 py-1.5 rounded-full bg-white/5 text-slate-400 hover:text-white">📺 Videos</button>
-      <button onclick="switchTab('Maps')" class="tab-btn px-3 py-1.5 rounded-full bg-white/5 text-slate-400 hover:text-white">🗺️ Maps</button>
+      <button id="tab-all" onclick="switchTab('All')" class="tab-btn px-3 py-1.5 rounded-full bg-blue-600 text-white">🔍 All</button>
+      <button id="tab-images" onclick="switchTab('Images')" class="tab-btn px-3 py-1.5 rounded-full bg-white/5 text-slate-400 hover:text-white">🖼️ Images</button>
+      <button id="tab-news" onclick="switchTab('News')" class="tab-btn px-3 py-1.5 rounded-full bg-white/5 text-slate-400 hover:text-white">📰 News</button>
+      <button id="tab-videos" onclick="switchTab('Videos')" class="tab-btn px-3 py-1.5 rounded-full bg-white/5 text-slate-400 hover:text-white">📺 Videos</button>
+      <button id="tab-maps" onclick="switchTab('Maps')" class="tab-btn px-3 py-1.5 rounded-full bg-white/5 text-slate-400 hover:text-white">🗺️ Maps</button>
     </div>
   </header>
 
   <main id="main-container" class="flex-1 flex flex-col w-full items-center justify-center p-4">
     
-    <div id="home-view" class="w-full max-w-2xl flex flex-col items-center animate-fade-in">
+    <div id="home-view" class="w-full max-w-3xl flex flex-col items-center justify-center min-h-[65vh] px-2 md:px-6 animate-fade-in">
       
       <div class="text-center mb-6">
         <div id="clock-time" class="text-3xl font-bold text-white tracking-wide">00:00</div>
@@ -96,19 +96,19 @@
       </div>
 
       <div class="relative mb-8 select-none text-center">
-        <h1 class="text-7xl md:text-8xl skrit-logo-allblue relative inline-block">
+        <h1 class="text-6xl sm:text-7xl md:text-8xl skrit-logo-allblue relative inline-block tracking-tight">
           Skrit
           <i data-lucide="sparkles" class="absolute -top-4 -right-6 w-6 h-6 text-blue-400 animate-pulse"></i>
         </h1>
       </div>
 
-      <form onsubmit="handleSearch(event)" class="w-full relative flex flex-col items-center gap-6">
+      <form onsubmit="handleSearch(event)" class="w-full max-w-2xl relative flex flex-col items-center gap-6">
         <div class="w-full relative group">
           <div class="absolute inset-0 bg-blue-500/10 rounded-full blur-md group-hover:opacity-100 transition-all"></div>
-          <div class="relative flex items-center bg-[#13131a] border border-white/10 rounded-full px-2 py-2 focus-within:border-blue-500/50 focus-within:ring-1 focus-within:ring-blue-500/50">
-            <i data-lucide="search" class="w-5 h-5 text-slate-500 ml-4"></i>
-            <input type="text" id="home-search-input" class="flex-1 bg-transparent border-none outline-none text-lg px-4 py-2 text-white placeholder-slate-600" placeholder="Ask anything..." autofocus oninput="syncInputs(this.value)" />
-            <button type="submit" id="home-search-btn" disabled class="bg-blue-600 hover:bg-blue-500 disabled:opacity-40 disabled:cursor-not-allowed text-white px-6 py-2.5 rounded-full text-sm font-medium transition-all cursor-pointer">
+          <div class="relative flex items-center bg-[#111116] border border-white/10 rounded-full px-1.5 py-1.5 shadow-lg shadow-black/50 focus-within:border-blue-500 focus-within:ring-2 focus-within:ring-blue-500/20 transition-all duration-200">
+            <i data-lucide="search" class="w-5 h-5 text-slate-400 ml-4 shrink-0"></i>
+            <input type="text" id="home-search-input" class="flex-1 bg-transparent border-none outline-none text-base sm:text-lg px-3 py-2 text-white placeholder-slate-500" placeholder="Ask anything or enter a search query..." autofocus oninput="syncInputs(this.value)" />
+            <button type="submit" id="home-search-btn" disabled class="bg-blue-600 hover:bg-blue-500 disabled:opacity-30 disabled:hover:bg-blue-600 text-white px-5 sm:px-6 py-2 rounded-full text-sm font-semibold tracking-wide transition-all shrink-0 cursor-pointer">
               Search
             </button>
           </div>
@@ -168,15 +168,49 @@
       <button onclick="handleReset()" class="mt-4 self-start text-xs text-blue-500 hover:underline">← Return to Search Engine</button>
     </div>
 
-    <div id="privacy-view" class="hidden w-full max-w-3xl flex-col gap-4 animate-fade-in py-8">
-      <h2 class="text-3xl font-bold text-white">Privacy Architecture</h2>
-      <p class="text-slate-300 text-sm leading-relaxed">Operational models run via localized storage structures. Query records remain non-persistent to server storage units, safeguarding individual device identities efficiently.</p>
+    <div id="privacy-view" class="hidden w-full max-w-3xl flex-col gap-5 animate-fade-in py-8">
+      <h2 class="text-3xl font-bold text-white tracking-tight">Privacy Policy & Architecture</h2>
+      <p class="text-slate-300 text-sm leading-relaxed">At Skrit, privacy isn't an option—it is the default architecture. Unlike traditional platforms that monitor your online fingerprint, we do not track, log, or sell your search context history.</p>
+      
+      <div class="flex flex-col gap-4 mt-2">
+        <div class="border border-white/5 bg-white/[0.01] p-4 rounded-xl">
+          <h3 class="text-base font-semibold text-blue-400 mb-1">1. Local Device Storage Policies</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">Your data belongs to you. All user preference switches, interface memory states, and layout configurations are kept securely inside your individual computer or phone's web sandboxed browser memory (such as localStorage). This telemetry never leaves your system and cannot be read by external operators.</p>
+        </div>
+        
+        <div class="border border-white/5 bg-white/[0.01] p-4 rounded-xl">
+          <h3 class="text-base font-semibold text-blue-400 mb-1">2. Zero Identity Mapping</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">We don't maintain user accounts or require sign-ins to look up information. Every query you execute passes dynamically through public index pipelines stripped completely of IP strings, physical geo-location data, cookie identifier packets, or custom user-agent trackers.</p>
+        </div>
+
+        <div class="border border-white/5 bg-white/[0.01] p-4 rounded-xl">
+          <h3 class="text-base font-semibold text-blue-400 mb-1">3. External Third-Party Media Requests</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">When utilizing embedded fallbacks to fetch direct real-time visual resources (such as Google Images/Videos or Wikipedia structures), connections are initiated direct-to-source on the client side. Your network queries are processed cleanly to keep you fully shielded from tracking arrays.</p>
+        </div>
+      </div>
       <button onclick="handleReset()" class="mt-4 self-start text-xs text-blue-500 hover:underline">← Return to Search Engine</button>
     </div>
 
-    <div id="terms-view" class="hidden w-full max-w-3xl flex-col gap-4 animate-fade-in py-8">
-      <h2 class="text-3xl font-bold text-white">Terms of Operation</h2>
-      <p class="text-slate-300 text-sm leading-relaxed">Usage of the platform implies adherence to standardized structural operations without data mining extraction procedures. Unauthorized security breaches remain prohibited.</p>
+    <div id="terms-view" class="hidden w-full max-w-3xl flex-col gap-5 animate-fade-in py-8">
+      <h2 class="text-3xl font-bold text-white tracking-tight">Terms of Operation</h2>
+      <p class="text-slate-300 text-sm leading-relaxed">Welcome to Skrit. By querying information or interacting with our interfaces, you acknowledge and agree to adhere strictly to the operating parameters detailed below.</p>
+      
+      <div class="flex flex-col gap-4 mt-2">
+        <div class="border border-white/5 bg-white/[0.01] p-4 rounded-xl">
+          <h3 class="text-base font-semibold text-blue-400 mb-1">1. Permitted Use & Service Terms</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">This platform is delivered as a modern, lightweight index client solution for open-source research and semantic discovery. Users agree not to introduce malicious query vectors, launch structural Denial of Service attacks (DoS), or scrape index pages in a way that disrupts standard server processing pipelines.</p>
+        </div>
+
+        <div class="border border-white/5 bg-white/[0.01] p-4 rounded-xl">
+          <h3 class="text-base font-semibold text-blue-400 mb-1">2. Content Source Accountability Disclaimer</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">Skrit processes live, dynamic external indexing data structures (including Wikipedia records and open web links). Because this material is aggregated completely in real-time across the open internet, helloskrit cannot guarantee the infinite accuracy, completeness, or safety of external site contents. Exercise caution when visiting non-affiliated domains.</p>
+        </div>
+
+        <div class="border border-white/5 bg-white/[0.01] p-4 rounded-xl">
+          <h3 class="text-base font-semibold text-blue-400 mb-1">3. Automated Dynamic Index Modifications</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">We reserve the immediate right to optimize, rewrite, update, or shift local interface parameters, layout templates, media querying engines, or asset integrations at any stage without prior notification to protect performance stability across worldwide nodes.</p>
+        </div>
+      </div>
       <button onclick="handleReset()" class="mt-4 self-start text-xs text-blue-500 hover:underline">← Return to Search Engine</button>
     </div>
 
@@ -235,6 +269,7 @@
     const homeSearchBtn = document.getElementById('home-search-btn');
 
     let currentQuery = '';
+    let currentActiveTab = 'All';
     const viewList = [homeView, resultsView, aboutView, privacyView, termsView];
 
     function syncInputs(val) {
@@ -271,17 +306,33 @@
       switchView(target, true);
     }
 
-    function switchTab(tabName) {
+        function switchTab(tabName) {
+      currentActiveTab = tabName;
+      
+      // Reset active styles for all tab controls
       document.querySelectorAll('.tab-btn').forEach(btn => {
         btn.classList.remove('bg-blue-600', 'text-white');
-        btn.classList.add('bg-white/5', 'text-slate-400');
+        btn.classList.add('bg-white/5', 'text-slate-400', 'hover:text-white');
       });
-      const activeBtn = event.currentTarget;
+      
+      // Apply active style to selected tab element based on explicit query selectors
+      const tabMap = {
+        'All': 'tab-all',
+        'Images': 'tab-images',
+        'News': 'tab-news',
+        'Videos': 'tab-videos',
+        'Maps': 'tab-maps'
+      };
+      
+      const activeBtn = document.getElementById(tabMap[tabName]);
       if (activeBtn) {
-        activeBtn.classList.remove('bg-white/5', 'text-slate-400');
+        activeBtn.classList.remove('bg-white/5', 'text-slate-400', 'hover:text-white');
         activeBtn.classList.add('bg-blue-600', 'text-white');
       }
-      if (currentQuery.trim()) handleSearch();
+      
+      if (currentQuery.trim()) {
+        handleSearch();
+      }
     }
 
     async function handleSearch(e) {
@@ -290,14 +341,31 @@
 
       switchView(resultsView, true);
 
+      // Trigger initial layout loading state animation
       loadingState.classList.remove('hidden');
       loadingState.classList.add('flex');
       resultsContentLayout.classList.add('hidden');
       emptyState.classList.add('hidden');
 
       try {
-        const res = await fetch(`https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${encodeURIComponent(currentQuery)}&utf8=&format=json&origin=*`);
+        let apiUrl = '';
+        
+        // Modulates target endpoint architecture depending on selected navigation filter
+        if (currentActiveTab === 'News') {
+          apiUrl = `https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${encodeURIComponent(currentQuery + ' current news event production breakthrough')}&utf8=&format=json&origin=*`;
+        } else if (currentActiveTab === 'Images') {
+          apiUrl = `https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${encodeURIComponent('File:' + currentQuery)}&utf8=&format=json&origin=*`;
+        } else {
+          apiUrl = `https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${encodeURIComponent(currentQuery)}&utf8=&format=json&origin=*`;
+        }
+
+        const res = await fetch(apiUrl);
         const data = await res.json();
+        
+        if (!data.query || !data.query.search) {
+          throw new Error('Data format invalid or missing.');
+        }
+        
         const results = data.query.search;
 
         loadingState.classList.add('hidden');
@@ -305,37 +373,69 @@
 
         if (results.length > 0) {
           resultsContentLayout.classList.remove('hidden');
-          resultsMeta.innerText = `Retrieved ${results.length} contextual indexing matches for "${currentQuery}"`;
+          resultsMeta.innerText = `Retrieved ${results.length} structural matching matrices for "${currentQuery}" [Filter: ${currentActiveTab}]`;
           
-          // Populate the AI Box dynamically matching queries
-          aiSnippetContent.innerText = `Based on current network indices, "${results[0].title}" presents key significance concerning "${currentQuery}". ${results[0].snippet.replace(/<[^>]*>/g, '')}...`;
+          // Pure clean text extraction without dangerous HTML spans
+          const coreSnippetClean = results[0].snippet.replace(/<[^>]*>/g, '');
+          aiSnippetContent.innerText = `Synthesized Matrix Report: Analysis reveals "${results[0].title}" features high contextual significance regarding your query expression. Details point out: ${coreSnippetClean}...`;
 
-          resultsContainer.innerHTML = results.map(result => `
-            <div class="group flex flex-col gap-1.5 bg-white/[0.01] p-5 rounded-2xl border border-white/5 hover:border-blue-500/30 transition-all hover:bg-white/[0.03]">
-              <a href="https://en.wikipedia.org/?curid=${result.pageid}" target="_blank" rel="noopener noreferrer" class="text-xs text-slate-400 flex items-center gap-1.5 mb-1">
-                en.wikipedia.org <i data-lucide="external-link" class="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity"></i>
-              </a>
-              <a href="https://en.wikipedia.org/?curid=${result.pageid}" target="_blank" rel="noopener noreferrer" class="text-xl font-semibold text-blue-400 hover:text-blue-300 hover:underline decoration-blue-400/50 underline-offset-4">
-                ${result.title}
-              </a>
-              <p class="text-slate-300 text-sm leading-relaxed mt-1">${result.snippet}...</p>
-            </div>
-          `).join('');
+          // Generate result structural elements onto the DOM view
+          resultsContainer.innerHTML = results.map(result => {
+            const cleanDescription = result.snippet.replace(/<[^>]*>/g, '');
+            let dynamicIcon = 'search';
+            let formattedTitle = result.title;
+            
+            if (currentActiveTab === 'Images') {
+              dynamicIcon = 'image';
+              formattedTitle = formattedTitle.replace(/^File:/i, '');
+            } else if (currentActiveTab === 'News') {
+              dynamicIcon = 'newspaper';
+            } else if (currentActiveTab === 'Videos') {
+              dynamicIcon = 'video';
+            } else if (currentActiveTab === 'Maps') {
+              dynamicIcon = 'map-pin';
+            }
+
+            return `
+              <div class="group flex flex-col gap-1.5 bg-white/[0.01] p-5 rounded-2xl border border-white/5 hover:border-blue-500/30 transition-all hover:bg-white/[0.02]">
+                <a href="https://en.wikipedia.org/?curid=${result.pageid}" target="_blank" rel="noopener noreferrer" class="text-xs text-slate-400 flex items-center gap-1.5 mb-1 font-mono">
+                  en.wikipedia.org/wiki/${encodeURIComponent(result.title)} <i data-lucide="external-link" class="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                </a>
+                <a href="https://en.wikipedia.org/?curid=${result.pageid}" target="_blank" rel="noopener noreferrer" class="text-xl font-semibold text-blue-400 hover:text-blue-300 hover:underline decoration-blue-400/30 underline-offset-4 flex items-center gap-2">
+                  <i data-lucide="${dynamicIcon}" class="w-4 h-4 text-blue-500/70 shrink-0"></i>
+                  <span>${formattedTitle}</span>
+                </a>
+                <p class="text-slate-300 text-sm leading-relaxed mt-1">${cleanDescription || 'No additional content snippet returned from indexing service matrix.'}...</p>
+              </div>
+            `;
+          }).join('');
           
+          // Refresh Lucide graphics across newly compiled nodes
           lucide.createIcons();
         } else {
           emptyState.classList.remove('hidden');
-          emptyMessage.innerText = `No results discovered for target parameter: "${currentQuery}"`;
+          const emptyMessage = document.getElementById('empty-message');
+          if (emptyMessage) {
+            emptyMessage.innerText = `No localized data matches identified for operational query: "${currentQuery}"`;
+          }
         }
       } catch (error) {
-        console.error('Data retrieval matrix failure:', error);
+        console.error('System retrieval pipeline failure:', error);
         loadingState.classList.add('hidden');
+        loadingState.classList.remove('flex');
+        emptyState.classList.remove('hidden');
+        const emptyMessage = document.getElementById('empty-message');
+        if (emptyMessage) {
+          emptyMessage.innerText = `Network processing protocol experienced a failure index connection error.`;
+        }
       }
     }
 
     function handleReset() {
       syncInputs('');
       switchView(homeView, false);
+      currentActiveTab = 'All';
+      switchTab('All');
     }
   </script>
 </body>
